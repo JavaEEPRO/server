@@ -1,11 +1,6 @@
-const http = require('http');
+const Koa = require("koa");
 const port = 8080;
-const requestHandler = (request, response) => {
-    console.log(request.url);
-    response.end(getFormattedDate() + " INFO Node.js server is started successfully");
-};
-const server = http.createServer(requestHandler);
-
+const server = new Koa();
 const mimeTypes = {
     '.js': 'text/javascript',
     '.json': 'application/json',
@@ -20,12 +15,16 @@ const mimeTypes = {
     '.woff2': 'font/woff2'
 };
 
-server.listen(port, (err) => {
-    if (err) {
+server
+    .use(ctx => {
+        ctx.body = getFormattedDate() + " INFO koa server is started and running successfully";
+    })
+    .listen(port, (err) => {
+        if (err) {
         return console.log(getFormattedDate() + " WARNING error occurred", err);
     }
     console.log(getFormattedDate() + ` INFO server is listening on ${port} port`);
-});
+    });
 
 //
 function getFormattedDate() {
