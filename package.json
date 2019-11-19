@@ -10,6 +10,7 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "devtools": "^5.16.7",
     "koa": "^2.11.0"
   },
   "dependencies": {
